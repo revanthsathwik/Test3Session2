@@ -1,37 +1,45 @@
 #include<stdio.h>
-void input(int *n,int *r)
+int input_array_size()
 {
-    printf("enter n  value \n");
-    scanf("%d",n);
-    printf("enter r valur\n");
-    scanf("%d",r);
-    
+  int x;
+  printf("How many numbers do you want to enter:- ");
+  scanf("%d",&x);
+  return x;
 }
-int factorial(int r)
+void input_array(int n,int a[n])
 {
-    int n,i,v=1;
-    for(i=r;i>=1;i--)
+  int i;
+  for(i=0;i<n;i++)
+  {
+    printf("Enter %dth number:- ",i+1);
+    scanf("%d",&a[i]);
+  }
+}
+int sum_composite(int n, int a[n])
+{
+  int k,i,sum=0,count=0;
+  for(i=0;i<n;i++)
+  {
+    for(k=1;a[i]%k==0 && k<a[i];k++)
     {
-        v=v*i;
+      count=count+1;
     }
-    return v;
+    if(count>2)
+    sum=sum+a[i];
+  }
+  return sum;
 }
-int ncr(int n,int r)
+void output(int sum)
 {
-    int x;
-    x=factorial(n)/(factorial(r)*factorial(n-r));
-    return x;
-}
-void output(int n,int r,int x)
-{
-    printf("the ncr value is %d",x);
+  printf("Sum of all composite numbers is %d",sum);
 }
 int main()
 {
-    int n,r,x;
-    input(&n,&r);
-    x=ncr(n,r); 
-    output(n,r,x);
-    return 0;
-
+  int n,result;
+  n=input_array_size();
+  int a[n];
+  input_array(n,a);
+  result=sum_composite(n,a);
+  output(result);
+  return 0;
 }
